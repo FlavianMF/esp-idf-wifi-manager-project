@@ -1,0 +1,10 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.espIdfPathWin": "c:\\Users\\flavian.fernandes\\esp\\v5.1.4\\esp-idf",
+    "idf.espAdfPathWin": "c:\\Espressif\\tools\\esp-adf",
+    "idf.openOcdConfigs": [
+        "board/esp32-wrover-kit-3.3v.cfg"
+    ],
+    "idf.portWin": "COM12",
+    "idf.toolsPathWin": "c:\\Espressif\\tools"
+}
