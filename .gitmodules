@@ -1,3 +1,6 @@
 [submodule "components/esp32-wifi-manager"]
 	path = components/esp32-wifi-manager
 	url = https://github.com/tonyp7/esp32-wifi-manager.git
+[submodule "components/ota_ws_update"]
+	path = components/ota_ws_update
+	url = https://github.com/ok-home/ota_ws_update.git
