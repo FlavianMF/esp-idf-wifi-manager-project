@@ -37,6 +37,9 @@ SOFTWARE.
 #include "wifi_manager.h"
 #include "http_app.h"
 
+#include "ota_ws_update.h"
+
+
 /* @brief tag used for ESP serial console messages */
 static const char TAG[] = "main";
 
@@ -195,8 +198,13 @@ void cb_connection_ok(void *pvParameters)
 		ESP_LOGE(TAG, "httpd_register_uri_handler failed (%s)!", esp_err_to_name(err));
 	}
 
+    ota_ws_register_uri_handler(wifi_manager_server);
+
 
 	ESP_LOGI(TAG, "wifi_manager_server registered");
+
+
+	ESP_LOGI(TAG, "Essa é uma nova versão");
 
 	// wifi_manager_disconnect_async();
 
