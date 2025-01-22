@@ -6,7 +6,7 @@
         "interface/ftdi/esp32_devkitj_v1.cfg",
         "target/esp32s3.cfg"
     ],
-    "idf.portWin": "COM21",
+    "idf.portWin": "COM12",
     "idf.toolsPathWin": "c:\\Espressif\\tools",
     "files.associations": {
         "*.prod_common": "kconfig",
@@ -14,7 +14,9 @@
         "*.debug": "kconfig",
         "*.old": "kconfig",
         "esp_wifi.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "http_app.h": "c",
+        "wifi_manager.h": "c"
     },
     "idf.flashType": "UART"
 }

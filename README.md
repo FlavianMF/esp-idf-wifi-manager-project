@@ -14,3 +14,14 @@ This component open a http server in a Captive Portal to serve a web page to set
 Acho que da pra usar esse servidor HTTP que o component sobre para a página, para criar um OTA (Update Over The Air)
 
 Da pra pegar uma ideia de como criar um captive portal por aqui também
+
+## Integração com o OTA Web Server
+
+### Arrumando a questão do NVS
+
+Para que funcione o OTA, é necessário atualizar o partitions table do micro, e é preciso
+ter um cuidado especial nesse arquivo, no que diz respeito a partição de **NVS**
+
+É necessário ter 0x6000 de tamanho
+
+![NVS_partitions_table](./docs/images/image.png)
