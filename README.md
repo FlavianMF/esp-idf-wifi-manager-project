@@ -1,32 +1,27 @@
-# _Sample project_
+![ESP-IDF Version](https://img.shields.io/badge/ESP_IDF_Version_Compatible-5.1.4-red)
+![ESP-IDF Version](https://img.shields.io/badge/Boards_Compatible-esp32_s3-red)
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+# ESP-IDF WiFi Manager Project Sample
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+This is a sample project with a kind of WiFi manager esp-idf component
 
+This project use the [esp32-wifi-manager](https://github.com/tonyp7/esp32-wifi-manager/tree/235b63e2a614b450b7748e62c2d4f3d7b38ff03c) component
 
+This component open a http server in a Captive Portal to serve a web page to set the wifi connection for the board
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## O que eu acho
 
-## Example folder contents
+Acho que da pra usar esse servidor HTTP que o component sobre para a página, para criar um OTA (Update Over The Air)
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+Da pra pegar uma ideia de como criar um captive portal por aqui também
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+## Integração com o OTA Web Server
 
-Below is short explanation of remaining files in the project folder.
+### Arrumando a questão do NVS
 
-```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+Para que funcione o OTA, é necessário atualizar o partitions table do micro, e é preciso
+ter um cuidado especial nesse arquivo, no que diz respeito a partição de **NVS**
+
+É necessário ter 0x6000 de tamanho
+
+![NVS_partitions_table](./docs/images/image.png)
