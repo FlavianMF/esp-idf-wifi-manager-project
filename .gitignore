@@ -1,6 +1,8 @@
 build*/
 sdkconfig
 sdkconfig.old
+
 .vscode/c_cpp_properties.json
 .vscode/settings.json
+
 managed_components/
