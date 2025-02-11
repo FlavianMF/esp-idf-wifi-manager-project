@@ -12,4 +12,7 @@ add_compile_options(-Wno-format)
 set(SDKCONFIG "${CMAKE_BINARY_DIR}/sdkconfig")
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+
+include(${CMAKE_SOURCE_DIR}/minify_html.cmake)
+
 project(test_wifi_manager)
