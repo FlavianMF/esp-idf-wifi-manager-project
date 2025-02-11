@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração do Microcontrolador</title>
+    <link rel="stylesheet" href="style_home.css">
+</head>
+<body>
+    <header>
+        <h1>Configuração do Microcontrolador</h1>
+        <div class="info">
+            <span id="chip-id">Chip ID: --</span> | 
+            <span id="build-version">App Version: --</span> | 
+            <span id="build-time">Build: --</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Parâmetros</h2>
+
+        <div class="config-item">
+            <label for="wifi-ssid">SSID Wi-Fi:</label>
+            <input type="text" id="wifi-ssid" placeholder="Nome da rede">
+        </div>
+
+        <div class="config-item">
+            <label for="wifi-password">Senha Wi-Fi:</label>
+            <input type="password" id="wifi-password" placeholder="Digite a senha">
+        </div>
+
+        <div class="config-item">
+            <label for="mode">Modo de Operação:</label>
+            <select id="mode">
+                <option value="station">Station</option>
+                <option value="ap">Access Point</option>
+            </select>
+        </div>
+
+        <button onclick="salvarConfiguracao()">Salvar Configuração</button>
+    </div>
+    <script src="script_home.js"></script>
+</body>
+</html>
