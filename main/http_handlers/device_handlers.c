@@ -12,6 +12,7 @@
 
 #include "cJSON.h"
 
+#include "version_info.h"
 
 static const char *TAG = "device_handlers";
 
@@ -36,7 +37,17 @@ esp_err_t app_version_get_handler(httpd_req_t *req)
         return ESP_FAIL;
     }
 
-    cJSON_AddStringToObject(json_response, "app_version", app_desc.version);
+    char version_string[50]; // Buffer para armazenar a versão
+    snprintf(version_string, sizeof(version_string), "%d.%d.%d-%s-%d",
+                    VERSION_MAJOR,
+                    VERSION_MINOR,
+                    PATCHLEVEL,
+                    app_desc.version,
+                    VERSION_TWEAK);
+
+    ESP_LOGI(TAG, "App version string: %s", version_string);
+
+    cJSON_AddStringToObject(json_response, "app_version", version_string);
     cJSON_AddStringToObject(json_response, "project_name", app_desc.project_name);
     cJSON_AddStringToObject(json_response, "idf_ver", app_desc.idf_ver);
     cJSON_AddStringToObject(json_response, "build_date", app_desc.date);
