@@ -9,6 +9,7 @@
 #include "ota_ws_update.h"
 
 #include "home_handlers.h"
+#include "device_handlers.h"
 
 static const char *TAG = "http_local_config";
 
@@ -22,6 +23,14 @@ static const http_handlers_t get_http_handlers[] = {
         .uri = get_home_uri,
         .handler = get_handler,
     },
+    {
+        .uri = get_chip_id_uri,
+        .handler = chip_id_get_handler,
+    },
+    {
+        .uri = get_app_version_uri,
+        .handler = app_version_get_handler,
+    }
 };
 
 // static const http_handlers_t post_http_handlers[] = {
@@ -35,7 +44,7 @@ esp_err_t all_get_handler(httpd_req_t *req)
             return get_http_handlers[i].handler(req);
         }
     }
-    ESP_LOGE(TAG, "URI to GET not found");
+    ESP_LOGE(TAG, "URI to GET \"%s\" not found", req->uri);
     httpd_resp_send_404(req);    
     return ESP_OK;
 }

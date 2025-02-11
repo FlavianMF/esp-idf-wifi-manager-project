@@ -1,8 +1,3 @@
-// Simula valores do microcontrolador (substitua com valores reais via JavaScript)
-document.getElementById("chip-id").textContent = "Chip ID: 12345678";
-document.getElementById("build-version").textContent = "Versão: 1.0.0";
-document.getElementById("build-time").textContent = "Build: 10/02/2025 14:30";
-
 function salvarConfiguracao() {
     const ssid = document.getElementById("wifi-ssid").value;
     const senha = document.getElementById("wifi-password").value;
@@ -17,8 +12,48 @@ function salvarConfiguracao() {
     alert("Configuração salva com sucesso!");
 }
 
-window.onload = function () {
-    const ssid = document.getElementById("wifi-ssid").value;
-    const senha = document.getElementById("wifi-password").value;
-    const modo = document.getElementById("mode").value;
+async function fetchChipId() {
+    fetch('/chip_id')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Falha ao obter Chip ID (HTTP " + response.status + ")");
+            }
+            return response.text();
+        })
+        .then(chipId => {
+            console.log("Chip ID:", chipId);
+            document.getElementById("chip-id").textContent = "Chip ID: " + chipId;
+        })
+        .catch(error => {
+            console.error("Erro ao obter o Chip ID:", error);
+            document.getElementById("chip-id").textContent = "Chip ID: Erro";
+            document.getElementById("chip-id").style.color = "red"; // Destaca visualmente o erro
+        });
+}
+
+async function fetchBuildInfo() {
+    fetch('/app_version')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Falha ao obter Informações de Build (HTTP " + response.status + ")");
+            }
+            return response.json();
+        })
+        .then(buildInfo => {
+            console.log("Informações de Build:", buildInfo);
+            document.getElementById("build-version").textContent = "App Version: " + buildInfo.app_version;
+            document.getElementById("build-time").textContent = "Build: " + buildInfo.build_date + " | " + buildInfo.build_time;
+        })
+        .catch(error => {
+            console.error("Erro ao obter Informações de Build:", error);
+            document.getElementById("build-version").textContent = "Versão: Erro";
+            document.getElementById("build-time").textContent = "Build: Erro";
+            document.getElementById("build-version").style.color = "red"; // Destaca visualmente o erro
+            document.getElementById("build-time").style.color = "red"; // Destaca visualmente o erro
+        });
+}
+
+window.onload = async function () {
+    await fetchChipId();
+    await fetchBuildInfo();
 };

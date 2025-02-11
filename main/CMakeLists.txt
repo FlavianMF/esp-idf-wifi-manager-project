@@ -18,8 +18,11 @@ idf_component_register(SRCS
                             ota_ws_update
                             esp_http_server
                             mdns
+                            json
                             esp_wifi
                             esp32-wifi-manager
+                            esp_app_format
+                            app_update
                         EMBED_FILES
                             ${EMBED_MINIFIED_HTML}
 )
