@@ -1,0 +1,19 @@
+name: ESP IDF artifact builder
+on:
+  push:
+    branches:
+      - test/workflow
+          steps:
+            - uses: tobozo/idf-builder@v1.0
+              with:
+                # Target repo [author/repo-name]
+                target_repo: FlavianMF/esp-idf-manager-project
+                # IDF Docker image version
+                idf_version: v5.3.2 # optional, default is v5.1
+                # Target chip
+                idf_target_chip: esp32s3 # optional, default is esp32
+                # Merged binary file name
+                merged_bin: # optional, default is merged.bin
+                # Artifact name
+                artifact_name: # optional, default is merged-bin
+          
