@@ -28,6 +28,7 @@ static const char TAG[] = "main";
 void app_main()
 {
 	/* start the wifi manager */
+	/* start the wifi manager */
 	wifi_manager_start();
     ESP_LOGI(TAG, "WiFi manager started");
 
