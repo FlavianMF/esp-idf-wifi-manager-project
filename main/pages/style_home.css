@@ -32,6 +32,11 @@ header h1 {
     margin: auto;
 }
 
+.container button {
+    margin-bottom: 10px;
+}
+
+
 /* Configurações dos inputs e botões */
 .config-item {
     margin-bottom: 15px;

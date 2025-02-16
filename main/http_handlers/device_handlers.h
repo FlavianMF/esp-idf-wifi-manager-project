@@ -20,4 +20,13 @@ esp_err_t app_version_get_handler(httpd_req_t *req);
 extern const char get_chip_id_uri[];
 esp_err_t chip_id_get_handler(httpd_req_t *req);
 
+extern const char get_reset_board_uri[];
+esp_err_t reset_get_handler(httpd_req_t *req);
+
+extern const char get_uptime_uri[];
+esp_err_t uptime_get_handler(httpd_req_t *req);
+
+extern const char get_reset_reason_uri[];
+esp_err_t reset_reason_get_handler(httpd_req_t *req);
+
 #endif // __DEVICE_HANDLERS_H__

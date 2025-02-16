@@ -14,8 +14,16 @@
             <span id="build-version">App Version: --</span> | 
             <span id="build-time">Build: --</span>
         </div>
+        <div class="info">
+            <span id="uptime">Uptime: --</span> |
+            <span id="reset-reason">Reset Reason: --</span>
+        </div>
     </header>
-
+    <div class="container">
+        <h2>Ações rápidas</h2>
+        <button id="ota-button" onclick="window.location.href = '/ota'">OTA</button>
+        <button id="reset-button" onclick="fetchResetBoard()">Reset Board</button>
+    </div>
     <div class="container">
         <h2>Parâmetros</h2>
 

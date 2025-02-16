@@ -23,6 +23,7 @@ idf_component_register(SRCS
                             esp32-wifi-manager
                             esp_app_format
                             app_update
+                            esp_timer
                         EMBED_FILES
                             ${EMBED_MINIFIED_HTML}
 )

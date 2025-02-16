@@ -30,6 +30,18 @@ static const http_handlers_t get_http_handlers[] = {
     {
         .uri = get_app_version_uri,
         .handler = app_version_get_handler,
+    },
+    {
+        .uri = get_uptime_uri,
+        .handler = uptime_get_handler,
+    },
+    {
+        .uri = get_reset_board_uri,
+        .handler = reset_get_handler,
+    },
+    {
+        .uri = get_reset_reason_uri,
+        .handler = reset_reason_get_handler,
     }
 };
 

@@ -1,7 +1,11 @@
 #include "device_handlers.h"
 
+#include "freertos/FreeRTOS.h"
+
 #include "esp_err.h"
 #include "esp_log.h"
+#include "esp_system.h"
+#include "esp_timer.h"
 
 #include "esp_http_server.h"
 
@@ -91,5 +95,46 @@ esp_err_t chip_id_get_handler(httpd_req_t *req)
     
     ESP_LOGI(TAG, "Chip ID: %s", chip_id_str);
     httpd_resp_send(req, chip_id_str, HTTPD_RESP_USE_STRLEN);
+    return ESP_OK;
+}
+
+
+const char get_reset_board_uri[] = "/reset_board";
+esp_err_t reset_get_handler(httpd_req_t *req)
+{
+    ESP_LOGI(TAG, "Restarting board...");
+
+    httpd_resp_send(req, "Restarting board", HTTPD_RESP_USE_STRLEN);
+
+    vTaskDelay(pdMS_TO_TICKS(2000));
+
+    esp_restart();
+    return ESP_OK;
+}
+
+const char get_uptime_uri[] = "/uptime";
+esp_err_t uptime_get_handler(httpd_req_t *req)
+{
+    ESP_LOGI(TAG, "Getting board uptime");
+
+    uint64_t uptime_milliseconds = esp_timer_get_time() / 1000;
+
+    char uptime_str[30];
+    snprintf(uptime_str, sizeof(uptime_str), "%lld", uptime_milliseconds);
+    ESP_LOGI(TAG, "Uptime string: %s", uptime_str);
+
+    httpd_resp_send(req, uptime_str, HTTPD_RESP_USE_STRLEN);
+    return ESP_OK;
+}
+
+const char get_reset_reason_uri[] = "/reset_reason";
+esp_err_t reset_reason_get_handler(httpd_req_t *req)
+{
+    ESP_LOGI(TAG, "Getting reset reason");
+    esp_reset_reason_t reason = esp_reset_reason();
+    char reason_str[30];
+    snprintf(reason_str, sizeof(reason_str), "%d", reason);
+    ESP_LOGI(TAG, "Reset reason: %s", reason_str);
+    httpd_resp_send(req, reason_str, HTTPD_RESP_USE_STRLEN);
     return ESP_OK;
 }
