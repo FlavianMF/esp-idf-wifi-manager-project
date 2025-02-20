@@ -13,6 +13,8 @@
 #include "device_handlers.h"
 #include "wifi_handlers.h"
 
+#include "mdns_config.h"
+
 static const char *TAG = "http_local_config";
 
 typedef struct {
@@ -154,6 +156,12 @@ void http_local_config(void *pvParameters)
 		ESP_LOGE(TAG, "httpd_register_uri_handler failed (%s)!", esp_err_to_name(err));
 	}
     ESP_LOGI(TAG, "Registered POST uri handler");
+
+    err = mdns_config();
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to set the mdns");
+    }
 
 	ESP_LOGI(TAG, "wifi_manager_server registered");
     return;

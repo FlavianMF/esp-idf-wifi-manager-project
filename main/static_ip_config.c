@@ -275,7 +275,7 @@ void http_local_config_static_ip(void *pvParameters)
         ESP_LOGE(TAG, "esp_netif_set_ip_info failed (%s)!", esp_err_to_name(err));
         return;
     }
-    ESP_LOGI(TAG, "Success to set static ip: %s, netmask: %s, gw: %s", ip4addr_ntoa(ip_info.ip.addr), ip4addr_ntoa(ip_info.netmask.addr), ip4addr_ntoa(ip_info.gw.addr));
+    ESP_LOGI(TAG, "Success to set static ip: %s, netmask: %s, gw: %s", ip4addr_ntoa(&ip_info.ip), ip4addr_ntoa(&ip_info.netmask), ip4addr_ntoa(&ip_info.gw));
     
     return;
 }
