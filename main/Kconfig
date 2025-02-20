@@ -1,0 +1,21 @@
+menu "Static IP config"
+
+    config USE_STATIC_IP_CONFIGURATION
+        bool "Select between DHCP or Static IP"
+        default n
+
+    config DEFAULT_IP_ADDRESS
+        depends on USE_STATIC_IP_CONFIGURATION
+        string "Default IP to use in static mode"
+        default "192.168.0.65"
+    
+    config DEFAULT_NETMASK
+        depends on USE_STATIC_IP_CONFIGURATION
+        string "Default netmask"
+        default "255.255.255.0"
+
+    config DEFAULT_GATEWAY
+        depends on USE_STATIC_IP_CONFIGURATION
+        string "Default gateway"
+        default "192.168.0.1"
+endmenu

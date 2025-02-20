@@ -141,9 +141,86 @@ async function fetchBuildInfo() {
         });
 }
 
+async function fetch_forget_credentials() {
+    fetch('/forget_wifi')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Falha ao esquecer as credenciais (HTTP " + response.status + ")");
+            }
+            return response.text();
+        })
+        .then(responseText => {
+            console.log("Resposta do servidor:", responseText);
+        })
+        .catch(error => {
+            console.error("Erro ao esquecer credenciais:", error);
+            alert(error.message);
+        })
+}
+
+async function fetch_wifi_config() {
+    fetch('/wifi_config')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Falha ao obter a configuração do WiFi (HTTP " + response.status + ")");
+            }
+            return response.json();
+        })
+        .then(wifiConfig => {
+            console.log("Configuração do WiFi:", wifiConfig);
+            document.getElementById("ip-label").innerText = "IP: "+ wifiConfig.ip;
+            document.getElementById("ip").value = wifiConfig.ip;
+            document.getElementById("mask-label").innerText = "Mask: " + wifiConfig.mask;
+            document.getElementById("mask").value = wifiConfig.mask;
+            document.getElementById("gateway-label").innerText = "Gateway: " + wifiConfig.gateway;
+            document.getElementById("gateway").value = wifiConfig.gateway;
+        })
+        .catch(error => {
+            console.error("Erro ao obter a configuração do WiFi:", error);
+            document.getElementById("ip").value = "Erro";
+            document.getElementById("mask").value = "Erro";
+            document.getElementById("gateway").value = "Erro";
+            document.getElementById("ip").style.color = "red"; // Destaca visualmente o erro
+            document.getElementById("mask").style.color = "red"; // Destaca visualmente o erro
+            document.getElementById("gateway").style.color = "red"; // Destaca visualmente o erro
+        });
+}
+
+async function send_wifi_config() {
+    fetch('/wifi_config', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ip: document.getElementById("ip").value,
+            mask: document.getElementById("mask").value,
+            gateway: document.getElementById("gateway").value
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Falha ao enviar a configuração do WiFi (HTTP " + response.status + ")");
+        }
+        return response.text();
+    })
+    .then(responseText => {
+        console.log("Resposta do servidor:", responseText);
+        alert(`Configuração do WiFi enviada com sucesso!\nRecarregando novo IP: ${document.getElementById("ip").value}`);
+
+        window.location.href = "http://" + document.getElementById("ip").value;
+    })
+    .catch(error => {
+        console.error(error);
+        alert(error.message);
+    })
+}
+
 window.onload = async function () {
     await fetchChipId();
     await fetchBuildInfo();
     await fetchUptime();
     await fetchResetReason();
+    await fetch_wifi_config();
+
 };

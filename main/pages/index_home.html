@@ -23,29 +23,23 @@
         <h2>Ações rápidas</h2>
         <button id="ota-button" onclick="window.location.href = '/ota'">OTA</button>
         <button id="reset-button" onclick="fetchResetBoard()">Reset Board</button>
+        <button id="forget_credentials" onclick="fetch_forget_credentials()">Esquecer WiFi</button>
     </div>
-    <div class="container">
-        <h2>Parâmetros</h2>
-
+    <div id="wifi_control" class="container">
+        <h2>WiFi</h2>
         <div class="config-item">
-            <label for="wifi-ssid">SSID Wi-Fi:</label>
-            <input type="text" id="wifi-ssid" placeholder="Nome da rede">
+            <label for="ip" id="ip-label">IP:</label>
+            <input type="text" id="ip" placeholder="Digite o IP">
         </div>
-
         <div class="config-item">
-            <label for="wifi-password">Senha Wi-Fi:</label>
-            <input type="password" id="wifi-password" placeholder="Digite a senha">
+            <label for="mask" id="mask-label">Mask:</label>
+            <input type="text" id="mask" placeholder="Digite a Mascara">
         </div>
-
         <div class="config-item">
-            <label for="mode">Modo de Operação:</label>
-            <select id="mode">
-                <option value="station">Station</option>
-                <option value="ap">Access Point</option>
-            </select>
+            <label for="gateway" id="gateway-label">Gateway:</label>
+            <input type="text" id="gateway" placeholder="Digite o gateway">
         </div>
-
-        <button onclick="salvarConfiguracao()">Salvar Configuração</button>
+        <button id="send_wifi" onclick="send_wifi_config()">Enviar</button>
     </div>
     <script src="script_home.js"></script>
 </body>

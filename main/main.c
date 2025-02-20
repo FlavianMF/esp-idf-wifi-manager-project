@@ -20,6 +20,7 @@
 #include "wifi_manager.h"
 
 #include "http_local_config.h"
+#include "static_ip_config.h"
 
 /** @brief tag used for ESP serial console messages */
 static const char TAG[] = "main";
@@ -30,6 +31,11 @@ void app_main()
 	/* start the wifi manager */
 	wifi_manager_start();
     ESP_LOGI(TAG, "WiFi manager started");
+
+	
+#if CONFIG_USE_STATIC_IP_CONFIGURATION == 1
+	wifi_manager_set_callback(WM_ORDER_CONNECT_STA, &http_local_config_static_ip);
+#endif
 
 	wifi_manager_set_callback(WM_EVENT_STA_GOT_IP, &http_local_config);
     ESP_LOGI(TAG, "WiFi manager callback setted");

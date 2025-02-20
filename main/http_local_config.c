@@ -6,10 +6,12 @@
 #include "http_app.h"
 #include "esp_http_server.h"
 #include "wifi_manager.h"
+#include "dns_server.h"
 #include "ota_ws_update.h"
 
 #include "home_handlers.h"
 #include "device_handlers.h"
+#include "wifi_handlers.h"
 
 static const char *TAG = "http_local_config";
 
@@ -42,12 +44,23 @@ static const http_handlers_t get_http_handlers[] = {
     {
         .uri = get_reset_reason_uri,
         .handler = reset_reason_get_handler,
+    },
+    {
+        .uri = get_forget_wifi_credentials_uri,
+        .handler = forget_wifi_credentials_handler,
+    },
+    {
+        .uri = get_wifi_config_uri,
+        .handler = get_wifi_config_handler,
     }
 };
 
-// static const http_handlers_t post_http_handlers[] = {
-//     {}
-// };
+static const http_handlers_t post_http_handlers[] = {
+    {
+        .uri = post_wifi_config_uri,
+        .handler = post_wifi_config_handler,
+    }
+};
 
 esp_err_t all_get_handler(httpd_req_t *req)
 {
@@ -63,12 +76,12 @@ esp_err_t all_get_handler(httpd_req_t *req)
 
 esp_err_t all_post_handler(httpd_req_t *req)
 {
-    // for (int i = 0; i < sizeof(post_http_handlers) / sizeof(post_http_handlers[0]); i++)
-    // {
-    //     if (strcmp(req->uri, post_http_handlers[i].uri) == 0) {
-    //         return post_http_handlers[i].handler(req);
-    //     }
-    // }
+    for (int i = 0; i < sizeof(post_http_handlers) / sizeof(post_http_handlers[0]); i++)
+    {
+        if (strcmp(req->uri, post_http_handlers[i].uri) == 0) {
+            return post_http_handlers[i].handler(req);
+        }
+    }
 
     ESP_LOGE(TAG, "URI to POST not found");
     httpd_resp_send_404(req);

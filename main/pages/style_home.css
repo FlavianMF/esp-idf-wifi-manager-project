@@ -36,10 +36,40 @@ header h1 {
     margin-bottom: 10px;
 }
 
-
 /* Configurações dos inputs e botões */
 .config-item {
     margin-bottom: 15px;
+}
+
+.config-item h3 {
+    margin-bottom: 10px;
+    justify-self: center;
+}
+
+.config-item button {
+    margin-top: 10px;
+}
+
+.config-item select,
+.config-item input
+{
+    margin-top: 10px;
+}
+
+.config-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.config-item label {
+    margin-right: 10px;
+}
+
+.config-item-row input,
+.config-item-row select
+{
+    max-width: 70%;
 }
 
 label {

@@ -29,4 +29,7 @@ esp_err_t uptime_get_handler(httpd_req_t *req);
 extern const char get_reset_reason_uri[];
 esp_err_t reset_reason_get_handler(httpd_req_t *req);
 
+extern const char get_forget_wifi_credentials_uri[];
+esp_err_t forget_wifi_credentials_handler(httpd_req_t *req);
+
 #endif // __DEVICE_HANDLERS_H__

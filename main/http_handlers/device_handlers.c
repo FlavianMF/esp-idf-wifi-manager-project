@@ -18,6 +18,8 @@
 
 #include "version_info.h"
 
+#include "wifi_manager.h"
+
 static const char *TAG = "device_handlers";
 
 const char get_app_version_uri[] = "/app_version";
@@ -136,5 +138,17 @@ esp_err_t reset_reason_get_handler(httpd_req_t *req)
     snprintf(reason_str, sizeof(reason_str), "%d", reason);
     ESP_LOGI(TAG, "Reset reason: %s", reason_str);
     httpd_resp_send(req, reason_str, HTTPD_RESP_USE_STRLEN);
+    return ESP_OK;
+}
+
+const char get_forget_wifi_credentials_uri[] = "/forget_wifi";
+esp_err_t forget_wifi_credentials_handler(httpd_req_t *req)
+{
+    ESP_LOGI(TAG, "forget_wifi_credentials");
+
+    wifi_manager_disconnect_async();
+
+    httpd_resp_sendstr(req, "Wifi credentials forgotten");
+
     return ESP_OK;
 }
