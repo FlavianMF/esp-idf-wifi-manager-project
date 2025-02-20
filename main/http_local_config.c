@@ -13,7 +13,9 @@
 #include "device_handlers.h"
 #include "wifi_handlers.h"
 
+#if CONFIG_USE_MDNS_CONFIG == 1
 #include "mdns_config.h"
+#endif
 
 static const char *TAG = "http_local_config";
 
@@ -157,11 +159,13 @@ void http_local_config(void *pvParameters)
 	}
     ESP_LOGI(TAG, "Registered POST uri handler");
 
+#if CONFIG_USE_MDNS_CONFIG == 1
     err = mdns_config();
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to set the mdns");
     }
+#endif
 
 	ESP_LOGI(TAG, "wifi_manager_server registered");
     return;

@@ -19,3 +19,33 @@ menu "Static IP config"
         string "Default gateway"
         default "192.168.0.1"
 endmenu
+
+menu "mDNS config"
+
+    config USE_MDNS_CONFIG
+        bool "Active mdns to find IP"
+        default y
+            help
+              If enabled, the dns configuration will add a configured hostname
+              in the local network e.g. espressi.local
+    
+    config SAME_LWIP_HOSTNAME
+        depends on USE_MDNS_CONFIG
+        bool "Use the same DNS hostname of the lwip?"
+        default y
+            help
+              If desabled, you can configure your on dns hostname
+
+    config MDNS_HOSTNAME
+        depends on USE_MDNS_CONFIG && !SAME_LWIP_HOSTNAME
+        string "Custom mdns hostname"
+        default "esp32"
+
+    config MDNS_INSTANCENAME
+        depends on USE_MDNS_CONFIG && !SAME_LWIP_HOSTNAME
+        string "Custom mdns instance name"
+        default "esp32"
+
+
+
+endmenu

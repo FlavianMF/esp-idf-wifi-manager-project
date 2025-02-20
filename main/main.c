@@ -20,7 +20,11 @@
 #include "wifi_manager.h"
 
 #include "http_local_config.h"
+
+#if CONFIG_USE_STATIC_IP_CONFIGURATION == 1
 #include "static_ip_config.h"
+#endif
+
 
 /** @brief tag used for ESP serial console messages */
 static const char TAG[] = "main";
